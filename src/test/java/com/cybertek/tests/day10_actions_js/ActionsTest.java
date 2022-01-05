@@ -41,15 +41,32 @@ public class ActionsTest {
 
 
 
+    }
+    @Test
+    public void dragAndDrop() throws InterruptedException {
 
+        driver.get("https://demos.telerik.com/kendo-ui/dragdrop/index");
 
+        Actions action = new Actions(driver);
 
+        WebElement source = driver.findElement(By.id("draggable"));
+        WebElement target = driver.findElement(By.id("droptarget"));
 
+        //driver.findElement()
+        action.dragAndDrop(source,target).perform();
+        Thread.sleep(3000);
 
+    }
+    @Test
+    public void dragAndDropChaining() throws InterruptedException {
+        driver.get("https://demos.telerik.com/kendo-ui/dragdrop/index");
+        Actions action = new Actions(driver);
 
+        WebElement source = driver.findElement(By.id("draggable"));
+        WebElement target = driver.findElement(By.id("droptarget"));
 
+        Thread.sleep(2000);
 
-
-
+        action.moveToElement(source).clickAndHold().moveToElement(target).pause(2000).release().perform();
     }
 }
