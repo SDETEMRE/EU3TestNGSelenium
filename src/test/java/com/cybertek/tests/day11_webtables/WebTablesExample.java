@@ -123,15 +123,19 @@ public class WebTablesExample {
     }
 
     private int getNumberOfColumns() {
-        List<WebElement> headers = driver.findElements(By.xpath("//table[@id='table1']//th"));
-        return headers.size();
+        List<WebElement> elements = driver.findElements(By.xpath("//table[@id='table1']//th"));
+        return elements.size();
     }
 
     private int getNumberOfRows() {
         List<WebElement> numRows = driver.findElements(By.xpath("//table[@id='table1']/tbody/tr"));
         return numRows.size();
+
     }
 
 
 
 }
+
+
+
