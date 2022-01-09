@@ -52,6 +52,10 @@ public class AdidasTask {
         return listPrice;
     }
 
+    public int productRemover(String product){
+     return 0;
+    }
+
     @Test
     public void Test(){
         // Navigate to "Laptop" → "Sony vaio i5" and click on "Add to cart". Accept pop up confirmation.
