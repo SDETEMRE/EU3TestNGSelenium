@@ -30,7 +30,6 @@ public class SingletonTest {
 
         driver.get("https://www.amazon.com");
 
-
         Driver.get().get("https://www.amazon.com");
     }
 
