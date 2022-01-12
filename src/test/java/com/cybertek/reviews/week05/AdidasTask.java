@@ -37,6 +37,8 @@ public class AdidasTask {
         navigateTo(category);
         navigateTo(product);
         // I want to get my expected price for that product
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h3")));
         WebElement priceElement = driver.findElement(By.tagName("h3"));
         String priceWholeText = priceElement.getText();
         String[] arr = priceWholeText.split(" ");
@@ -44,7 +46,6 @@ public class AdidasTask {
 
         navigateTo("Add to cart");
         // handle pop up
-        WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
         alert.accept();
@@ -52,18 +53,25 @@ public class AdidasTask {
         return listPrice;
     }
 
-    public int productRemover(String product){
-     return 0;
+    public int productRemover(String product) throws InterruptedException {
+        // locator //tr[contains(.,'Sony vaio i5')]/td[4]/a
+        navigateTo("Cart");
+        WebElement deletButton = driver.findElement(By.xpath("//tr[contains(.,'"+product+"')]/td[4]/a"));
+        deletButton.click();
+        Thread.sleep(3000);
+        return 0;
     }
 
     @Test
-    public void Test(){
+    public void Test() throws InterruptedException {
         // Navigate to "Laptop" → "Sony vaio i5" and click on "Add to cart". Accept pop up confirmation.
         expectedPurchaseAmount += productAdder("Laptop","Sony vaio i5");
         // Navigate to "Laptop" → "Dell i7 8gb" and click on "Add to cart". Accept pop up confirmation.
         expectedPurchaseAmount += productAdder("Laptop","Dell i7 8gb");
 
         System.out.println("expectedPurchaseAmount = " + expectedPurchaseAmount);
+
+        expectedPurchaseAmount -= productRemover("Sony vaio i5");
     }
 
 }
