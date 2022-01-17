@@ -1,6 +1,7 @@
 package com.cybertek.tests;
 
 import com.cybertek.utilities.ConfigurationReader;
+import com.cybertek.utilities.ConfigurationReaderTwo;
 import com.cybertek.utilities.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -16,25 +17,20 @@ public class TestBaseTwo {
     protected WebDriverWait wait;
 
     @BeforeMethod
-
     public void setUp(){
-
-        driver = Driver.get();
+        driver = Driver.get();   // statically calling object
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver,10);
-        driver.get(ConfigurationReader.get("url"));
+        driver.get(ConfigurationReaderTwo.get("demoblaze.url"));
+
     }
 
     @AfterMethod
-    public void tearDown() throws InterruptedException{
-
+    public void tearDown() throws InterruptedException {
         Thread.sleep(2000);
         Driver.closeDriver();
+        //  driver.quit();  NEVER NEVER use this statement again
     }
-
-
-
 }
-
